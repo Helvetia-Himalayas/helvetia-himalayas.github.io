@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Helvetia Himalayas | Futuristic Web Solutions</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet"> 
   <style>
     * {
       margin: 0;
@@ -127,11 +127,6 @@
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
-    }
-
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
     }
 
     /* Navigation */
@@ -384,24 +379,6 @@
       animation: fadeInUp 0.8s ease;
     }
 
-    .trust-badge {
-      margin-top: 1rem;
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-      color: var(--text-secondary);
-      font-size: 0.85rem;
-      animation: fadeInUp 1.2s ease;
-    }
-
-    .trust-badge span {
-      background: rgba(28, 158, 158, 0.1);
-      padding: 0.3rem 1rem;
-      border-radius: 40px;
-      border: 1px solid rgba(28, 158, 158, 0.2);
-    }
-
     .section-title {
       font-size: 2.2rem;
       margin-bottom: 1rem;
@@ -439,42 +416,38 @@
       margin-top: 1rem;
     }
 
+    /* FIXED: Removed the glitchy ::before pseudo-element that was causing random highlighting */
     .pricing-card {
       background: var(--card-bg);
       backdrop-filter: blur(10px);
       border-radius: 28px;
       padding: 2rem;
-      transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
       border: 1px solid var(--card-border);
       position: relative;
       overflow: visible;
     }
 
-    .pricing-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(28, 158, 158, 0.1), transparent);
-      transition: left 0.5s;
-    }
-
-    .pricing-card:hover::before {
-      left: 100%;
-    }
-
+    /* Clean hover effect without any pseudo-element interference */
     .pricing-card:hover {
       transform: translateY(-8px);
       border-color: rgba(28, 158, 158, 0.5);
       box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.5);
     }
 
+    /* Featured card styling - no conflicting animations */
     .pricing-card.featured {
       border: 2px solid var(--teal-bright);
-      background: linear-gradient(135deg, rgba(18, 18, 26, 0.95), rgba(28, 158, 158, 0.1));
+      background: linear-gradient(135deg, rgba(18, 18, 26, 0.95), rgba(28, 158, 158, 0.12));
       transform: scale(1.02);
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; 
+    }
+    
+    /* Featured card hover - maintains scale and adds lift */
+    .pricing-card.featured:hover {
+      transform: scale(1.02) translateY(-8px);
+      border-color: var(--teal-glow);
+      box-shadow: 0 25px 40px -12px rgba(28, 158, 158, 0.4);
     }
 
     .popular-badge {
@@ -508,6 +481,12 @@
       background-clip: text;
       color: transparent;
       margin: 0.75rem 0 0.5rem;
+    }
+
+    .pricing-desc {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.4;
     }
 
     .feature-list {
@@ -685,6 +664,11 @@
       background: radial-gradient(circle, rgba(28,158,158,0.1) 0%, transparent 70%);
       animation: spin 20s infinite linear;
     }
+    
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
 
     .maintenance-card > * {
       position: relative;
@@ -810,6 +794,9 @@
       .pricing-card.featured {
         transform: scale(1);
       }
+      .pricing-card.featured:hover {
+        transform: scale(1) translateY(-8px);
+      }
       .button-group {
         gap: 0.8rem;
       }
@@ -870,12 +857,77 @@
       <h2 class="section-title">Simple, transparent pricing</h2>
       <p class="section-subtitle">Choose the perfect package for your business stage — from a quick online presence to a full-featured website.</p>
       <div class="pricing-grid">
-        <div class="pricing-card"><h3>The One-Pager</h3><div class="pricing-price">60 CHF<small>one-time</small></div><div class="pricing-desc" style="color:var(--text-secondary)">Perfect for individuals, portfolios, or quick landing pages.</div><ul class="feature-list"><li>Single scrollable page layout</li><li>Mobile optimized</li><li>Social media links integration</li><li>Call-to-action button</li><li>Basic bio / intro section</li><li>Fast 48h turnaround</li></ul><a href="#contact" class="btn-pricing">Get Started →</a></div>
-        <div class="pricing-card featured"><div class="popular-badge">🔥 MOST POPULAR</div><h3>The Business Basic</h3><div class="pricing-price">150 CHF <small>one-time</small></div><div class="pricing-desc" style="color:var(--text-secondary)">New small businesses needing a professional face.</div><ul class="feature-list"><li>3–5 custom pages</li><li>Mobile responsive design</li><li>Google Maps integration</li><li>Standard SEO</li><li>Dedicated contact form</li><li>Testimonials section</li></ul><a href="#contact" class="btn-pricing">Get Started →</a></div>
-        <div class="pricing-card"><h3>The Pro Starter</h3><div class="pricing-price">250 CHF <small>one-time</small></div><div class="pricing-desc" style="color:var(--text-secondary)">Established businesses or early-stage shops.</div><ul class="feature-list"><li>Up to 10 pages</li><li>Blog / News section (CMS)</li><li>Basic E-commerce ready (up to 5 products)</li><li>Payment gateway integration</li><li>Premium speed optimization</li><li>SSL certificate & security</li></ul><a href="#contact" class="btn-pricing">Get Started →</a></div>
+        <div class="pricing-card">
+          <h3>The One-Pager</h3>
+          <div class="pricing-price">60 CHF<small> one-time</small></div>
+          <div class="pricing-desc">Perfect for individuals, portfolios, or quick landing pages.</div>
+          <ul class="feature-list">
+            <li>Single scrollable page layout</li>
+            <li>Mobile optimized</li>
+            <li>Social media links integration</li>
+            <li>Call-to-action button</li>
+            <li>Basic bio / intro section</li>
+            <li>Fast 48h turnaround</li>
+          </ul>
+          <a href="#contact" class="btn-pricing">Get Started →</a>
+        </div>
+        
+        <div class="pricing-card featured">
+          <div class="popular-badge">🔥 MOST POPULAR</div>
+          <h3>The Business Basic</h3>
+          <div class="pricing-price">150 CHF <small>one-time</small></div>
+          <div class="pricing-desc">New small businesses needing a professional face.</div>
+          <ul class="feature-list">
+            <li>3–5 custom pages</li>
+            <li>Mobile responsive design</li>
+            <li>Google Maps integration</li>
+            <li>Standard SEO</li>
+            <li>Dedicated contact form</li>
+            <li>Testimonials section</li>
+          </ul>
+          <a href="#contact" class="btn-pricing">Get Started →</a>
+        </div>
+        
+        <div class="pricing-card">
+          <h3>The Pro Starter</h3>
+          <div class="pricing-price">250 CHF <small>one-time</small></div>
+          <div class="pricing-desc">Established businesses or early-stage shops.</div>
+          <ul class="feature-list">
+            <li>Up to 10 pages</li>
+            <li>Blog / News section (CMS)</li>
+            <li>Basic E-commerce ready (up to 5 products)</li>
+            <li>Payment gateway integration</li>
+            <li>Premium speed optimization</li>
+            <li>SSL certificate & security</li>
+          </ul>
+          <a href="#contact" class="btn-pricing">Get Started →</a>
+        </div>
       </div>
-      <div class="comparison-title"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="1.5" style="display: inline-block; vertical-align: middle; margin-right: 8px;"><path d="M3 6h18v12H3zM8 10h8M8 14h5"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg> Compare features at a glance</div>
-      <div class="comparison-wrapper"><table class="comparison-table"><thead><tr><th>Feature</th><th>One-Pager (60 CHF)</th><th>Business Basic (150 CHF)</th><th>Pro Starter (250 CHF)</th></tr></thead><tbody><tr><td>Number of Pages</td><td>1</td><td>3–5</td><td>Up to 10</td></tr><tr><td>Mobile Responsive</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr><tr><td>Contact Form</td><td>Simple (2-3 fields)</td><td>Standard Form</td><td>Advanced/Custom</td></tr><tr><td>SEO Ready</td><td>Basic</td><td>Standard</td><td>Advanced</td></tr><tr><td>Google Maps</td><td>—</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr><tr><td>E-commerce</td><td>—</td><td>—</td><td class="check-yes">✓ (Up to 5 items)</td></tr><tr><td>Blog System</td><td>—</td><td>—</td><td class="check-yes">✓</td></tr><tr><td>SSL Certificate</td><td>—</td><td>—</td><td class="check-yes">✓</td></tr></tbody></table></div>
+      
+      <div class="comparison-title">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="1.5" style="display: inline-block; vertical-align: middle; margin-right: 8px;">
+          <path d="M3 6h18v12H3zM8 10h8M8 14h5"/>
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+        </svg> Compare features at a glance
+      </div>
+      
+      <div class="comparison-wrapper">
+        <table class="comparison-table">
+          <thead>
+            <tr><th>Feature</th><th>One-Pager (60 CHF)</th><th>Business Basic (150 CHF)</th><th>Pro Starter (250 CHF)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Number of Pages</td><td>1</td><td>3–5</td><td>Up to 10</td></tr>
+            <tr><td>Mobile Responsive</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+            <tr><td>Contact Form</td><td>Simple (2-3 fields)</td><td>Standard Form</td><td>Advanced/Custom</td></tr>
+            <tr><td>SEO Ready</td><td>Basic</td><td>Standard</td><td>Advanced</td></tr>
+            <tr><td>Google Maps</td><td>—</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+            <tr><td>E-commerce</td><td>—</td><td>—</td><td class="check-yes">✓ (Up to 5 items)</td></tr>
+            <tr><td>Blog System</td><td>—</td><td>—</td><td class="check-yes">✓</td></tr>
+            <tr><td>SSL Certificate</td><td>—</td><td>—</td><td class="check-yes">✓</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </section>
 
@@ -1015,7 +1067,7 @@
     }));
   }
 
-  // AJAX Form Submission - No page reload, stays on same page
+  // AJAX Form Submission
   const contactForm = document.getElementById('contactForm');
   
   if (contactForm) {
@@ -1027,54 +1079,48 @@
       submitBtn.innerText = 'Sending...';
       submitBtn.disabled = true;
       
-      // Get form data
       const formData = new FormData(contactForm);
       formData.append('_subject', 'New Website Inquiry from Helvetia Himalayas');
       formData.append('_template', 'table');
-      formData.append('_captcha', 'false');
       
       try {
         const response = await fetch('https://formsubmit.co/ajax/helvetia.himalayas@outlook.com', {
           method: 'POST',
-          body: formData
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(Object.fromEntries(formData))
         });
         
         const result = await response.json();
         
-        if (result.success) {
-          // Show success popup
+        if (response.ok && result.success !== false) {
           const popup = document.createElement('div');
           popup.innerHTML = `
-            <div style="position: fixed; top: 100px; left: 50%; transform: translateX(-50%); z-index: 9999; background: linear-gradient(135deg, #0F6B6B, #1C9E9E); color: white; padding: 1rem 2rem; border-radius: 60px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); display: flex; align-items: center; gap: 12px; animation: slideDown 0.5s ease;">
+            <div style="position: fixed; top: 100px; left: 50%; transform: translateX(-50%); z-index: 9999; background: linear-gradient(135deg, #0F6B6B, #1C9E9E); color: white; padding: 1rem 2rem; border-radius: 60px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); display: flex; align-items: center; gap: 12px; animation: slideDown 0.5s ease; z-index: 10000;">
               <span style="font-size: 1.5rem;">✓</span>
               <span style="font-weight: 500;">Message sent successfully! We'll get back to you within 24 hours.</span>
-              <button onclick="this.parentElement.parentElement.remove()" style="background: rgba(255,255,255,0.2); border: none; color: white; cursor: pointer; padding: 4px 10px; border-radius: 30px; margin-left: 10px;">✕</button>
+              <button onclick="this.parentElement.remove()" style="background: rgba(255,255,255,0.2); border: none; color: white; cursor: pointer; padding: 4px 10px; border-radius: 30px; margin-left: 10px;">✕</button>
             </div>
           `;
           document.body.appendChild(popup);
-          
-          // Clear form
           contactForm.reset();
-          
-          // Auto remove after 5 seconds
-          setTimeout(() => {
-            if (popup) popup.remove();
-          }, 5000);
+          setTimeout(() => { if(popup) popup.remove(); }, 5000);
         } else {
           throw new Error('Submission failed');
         }
       } catch (error) {
-        // Show error popup
         const errorPopup = document.createElement('div');
         errorPopup.innerHTML = `
-          <div style="position: fixed; top: 100px; left: 50%; transform: translateX(-50%); z-index: 9999; background: linear-gradient(135deg, #FF6B4A, #E55A3A); color: white; padding: 1rem 2rem; border-radius: 60px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); display: flex; align-items: center; gap: 12px; animation: slideDown 0.5s ease;">
+          <div style="position: fixed; top: 100px; left: 50%; transform: translateX(-50%); z-index: 9999; background: linear-gradient(135deg, #FF6B4A, #E55A3A); color: white; padding: 1rem 2rem; border-radius: 60px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); display: flex; align-items: center; gap: 12px; animation: slideDown 0.5s ease; z-index: 10000;">
             <span style="font-size: 1.5rem;">⚠️</span>
-            <span style="font-weight: 500;">Something went wrong. Please try again or email us directly.</span>
-            <button onclick="this.parentElement.parentElement.remove()" style="background: rgba(255,255,255,0.2); border: none; color: white; cursor: pointer; padding: 4px 10px; border-radius: 30px; margin-left: 10px;">✕</button>
+            <span style="font-weight: 500;">Please email us directly at helvetia.himalayas@outlook.com</span>
+            <button onclick="this.parentElement.remove()" style="background: rgba(255,255,255,0.2); border: none; color: white; cursor: pointer; padding: 4px 10px; border-radius: 30px; margin-left: 10px;">✕</button>
           </div>
         `;
         document.body.appendChild(errorPopup);
-        setTimeout(() => errorPopup.remove(), 5000);
+        setTimeout(() => { if(errorPopup) errorPopup.remove(); }, 6000);
       } finally {
         submitBtn.innerText = originalText;
         submitBtn.disabled = false;
@@ -1090,7 +1136,8 @@
       const target = document.querySelector(targetId);
       if (target) {
         e.preventDefault();
-        window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+        const offsetTop = target.getBoundingClientRect().top + window.pageYOffset - 85;
+        window.scrollTo({ top: offsetTop, behavior: 'smooth' });
         history.pushState(null, null, targetId);
       }
     });
